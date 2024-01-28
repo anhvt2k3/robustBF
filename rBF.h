@@ -5,6 +5,7 @@ class rBF {
     unsigned long int m;
     unsigned long int **kBF;
     unsigned long int TP=0, TN=0;
+    int bits=61;
     int x;
     int y;
     double err;
@@ -13,6 +14,114 @@ class rBF {
     long int seed1,seed2,seed3,seed4,seed5;
 
 protected:
+    void free_keyBF(unsigned long int **b2)
+    {
+        _free_(b2);
+    }
+    void _free_(unsigned long int **a)
+    {
+        // free(a);
+        // printf("\nMemory freed successfully...\n");
+        
+        for (int i = 0; i < x; ++i) {
+            free(a[i]); // Free memory for each sub-array
+        }
+
+        free(a); // Free memory for the array of pointers
+        printf("\nMemory freed successfully...\n");
+    }
+    void insert_keyBF(unsigned long int **b2, char *buff, int i)
+    {
+        
+        unsigned long int h1,h2,h3,h4,h5,h6,h7;
+
+        h1=murmur2(buff,i,seed1);
+        h2=murmur2(buff,i,seed2);
+        h3=murmur2(buff,i,seed3);
+        //h4=murmur2(buff,i,seed4);
+        //h5=murmur2(buff,i,seed5);
+        
+        _set_(b2,h1);
+        _set_(b2,h2);
+        _set_(b2,h3);
+        //_set_(b2,h4);
+        //_set_(b2,h5);
+        
+    }
+    int lookup_keyBF(unsigned long int **b2, char *buff, int i)
+    {
+        unsigned long int h1,h2,h3,h4,h5,h6,h7;
+
+        h1=murmur2(buff,i,seed1);
+        h2=murmur2(buff,i,seed2);
+        h3=murmur2(buff,i,seed3);
+        //h4=murmur2(buff,i,seed4);
+        //h5=murmur2(buff,i,seed5);	
+        if(_test_(b2,h1)==1)
+            if(_test_(b2,h2)==1)
+                if(_test_(b2,h3)==1)
+                    //if(_test_(b2,h4)==1)
+                        //if(_test_(b2,h5)==1)
+                            return 1;
+        return 0;									
+    }
+    void _set_(unsigned long int **a,unsigned long int h)
+    {
+        int i,j,pos;
+        i=h%x;
+        j=h%y;
+        pos=h%bits; 
+        a[i][j]=a[i][j]|(1UL<<pos);
+    }
+    int _test_(unsigned long int **a,unsigned long int h)
+    {
+        int i,j,pos;
+        int flag;
+        i=h%x; 
+        j=h%y;
+        pos=h%bits;
+        return ((a[i][j]&(1UL<<pos))>>pos);
+    }
+    void _del_(unsigned long int **a,unsigned long int h)
+    {
+        int i,j,pos;
+        unsigned long int p;
+        int flag;
+        i=h%x; 
+        j=h%y;
+        pos=h%bits;
+        p=(1UL<<pos);
+        if(p==(a[i][j]&(1UL<<pos)))
+            a[i][j]=a[i][j]^p;
+    }
+    void dim(int p, int q)
+    {
+        x=p;
+        y=q;
+    }
+    void setDim(int *x, int* y, unsigned long int m)
+    {
+        unsigned long int k=m/(2*64); 
+        int a,b,c,d,e,f;
+        unsigned long int i;
+
+        f=sqrt(k);
+        i=selectPrime(f);
+        //int j=(i/1.5);
+        a=prime[i/2+3];
+        b=prime[i/2-3];
+        //c=prime[i-3];
+        //d=prime[i+3];
+        //e=prime[i/3+3];
+        //f=prime[i/3-3];
+        dim(a,b);
+        // simpy set a = x, y = b
+        //dim1(c,d);
+        //dim2(e,f);
+        
+        printf("2DBF dimensions: \n%d  %d\n",a,b);
+        size+=(a*b)*64;
+    }
     void setDimension()
     {
         int* a = new int;
