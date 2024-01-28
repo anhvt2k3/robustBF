@@ -142,7 +142,7 @@ unsigned long int number(unsigned long int m,double err)
 	return (unsigned long int)(-(m*pow(log(2),2))/log(err));
 }
 
-void setDim(unsigned long int m)
+void setDim(int *x, int* y, unsigned long int m)
 {
 	unsigned long int k=m/(2*64); 
 	int a,b,c,d,e,f;
