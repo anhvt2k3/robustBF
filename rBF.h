@@ -233,6 +233,7 @@ public:
         try
         {
             lookupSmartBF(key);
+            print();
             return true;    
         }
         catch (const char* msg)
