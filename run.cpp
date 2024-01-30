@@ -1,6 +1,6 @@
-#include "rBF.h";
-#include <time.h>;
-#include <time.h>;
+#include "rBF.h"
+#include <time.h>
+#include <time.h>
 
 using namespace std;
 

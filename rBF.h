@@ -96,10 +96,10 @@ protected:
     }
     void dim(int p, int q)
     {
-        x=p;
-        y=q;
+        this->x=p;
+        this->y=q;
     }
-    void setDim(int *x, int* y, unsigned long int m)
+    void setDim(unsigned long int m)
     {
         unsigned long int k=m/(2*64); 
         int a,b,c,d,e,f;
@@ -121,16 +121,6 @@ protected:
         
         printf("2DBF dimensions: \n%d  %d\n",a,b);
         size+=(a*b)*64;
-    }
-    void setDimension()
-    {
-        int* a = new int;
-        int* b = new int;
-        setDim(a,b,m);
-        x = *a;
-        y = *b;
-        delete a;
-        delete b;
     }
     void initSeed()
     {
@@ -158,19 +148,22 @@ protected:
     unsigned long int **allocate()
     {
         int i,j,k;
-        unsigned long int **a=(unsigned long int **)malloc(x*sizeof(unsigned long int *));
+        printf("x=%d y=%d\n",x,y);
+        // unsigned long int **a=(unsigned long int **)malloc(x*sizeof(unsigned long int *));
+        unsigned long int **a=new unsigned long int *[x];
         if(a==NULL)
         {
-            printf("Unable to allocate!\n");
+            printf("Unable to allocate x-dim!\n");
             return NULL;
         }
         
         for(i=0;i<x;i++)
         {
-            a[i]=(unsigned long int *)malloc(y*sizeof(unsigned long int));
+            // a[i]=(unsigned long int *)malloc(y*sizeof(unsigned long int));
+            a[i]=new unsigned long int[y];
             if(a[i]==NULL)
             {
-                printf("Unable to allocate!\n");
+                printf("Unable to allocate y-dim!\n");
                 return NULL;
             }
         }
@@ -213,7 +206,7 @@ public:
         fp = false_positive;
         initSeed();
         m = memory(nn, err);
-        setDimension();
+        setDim(m);
         kBF = allocate();
         resetStat();
     };

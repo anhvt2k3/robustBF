@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <cmath>
 //////////
 // MAIN METHOD
@@ -13,15 +14,6 @@
 // unsigned long int size=0;
 // static int seed1, seed2,seed3,seed4,seed5;//,seed6, seed7, seed8,seed9,seed10;
 //static int seed11, seed12,seed13,seed14,seed15,seed16, seed17, seed18,seed19,seed20;
-unsigned long int selectPrime(unsigned long int k)
-{
-	unsigned long int i;
-	for(i=1;i<total_prime;i++)
-	{
-		if(prime[i]>k)
-			return i;
-	}
-}
 
 double error(unsigned long int m, unsigned long int n)
 {
@@ -1148,3 +1140,12 @@ unsigned int prime[10000]={
 104549,104551,104561,104579,104593,104597,104623,104639,104651,104659,
 104677,104681,104683,104693,104701,104707,104711,104717,104723,104729};
 
+unsigned long int selectPrime(unsigned long int k)
+{
+	unsigned long int i;
+	for(i=1;i<total_prime;i++)
+	{
+		if(prime[i]>k)
+			return i;
+	}
+}
