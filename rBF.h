@@ -4,7 +4,7 @@ class rBF {
     unsigned long int n;
     unsigned long int m;
     unsigned long int **kBF;
-    unsigned long int TP=0, TN=0;
+    unsigned long int TP,TN;
     int bits=61;
     int x;
     int y;
@@ -215,6 +215,7 @@ public:
         m = memory(nn, err);
         setDimension();
         kBF = allocate();
+        resetStat();
     };
     bool insert(char *key)
     {
@@ -233,7 +234,6 @@ public:
         try
         {
             lookupSmartBF(key);
-            print();
             return true;    
         }
         catch (const char* msg)
@@ -241,10 +241,27 @@ public:
             return false;
         }
     }
-    void print()
+    unsigned long int getTP()
     {
-        printf("True Positives: %ld\n",TP);
-        printf("True Negatives: %ld\n",TN);
+        return TP;
+    }
+    unsigned long int getTN()
+    {
+        return TN;
+    }
+    void resetStat()
+    {
+        TP=0; TN=0;
+    }
+    void printStructStat()
+    {
+        double mb=8*1024*1024.0;
+        //unsigned long int s=size;
+        printf("\nRequired memory size in bits: %lu\n", size);
+        printf("\nTotal memory size in MB: %lf\n", (double)(size)/mb);
+
+        printf("\nRequired memory size in bits: %lu\n", m);
+        printf("\nRequired memory size in MB: %lf\n", (double)(m)/mb);
     }
     ~rBF()
     {
