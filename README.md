@@ -7,6 +7,6 @@ OOP approach for robustBF
   `if ($?) {g++ run.cpp -o run}; if ($?) {./run}`
 ## 2. For Linux users:
 - Open terminal in the OOP folder
-- Run these lines in your terminal
+- Run theis line in your terminal
   
-  `g++ -o myprogram run.cpp && ./myprogram`  
+  `g++ -o run run.cpp && ./run`  
