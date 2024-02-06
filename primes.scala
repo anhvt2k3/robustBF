@@ -1,5 +1,12 @@
 object Prime {
     val total_prime: Int = 10000;
+    def selectPrime(k: Long): Long = {
+        for (i <- 0 until total_prime) {
+            if (prime(i) > k) {
+                return i;
+            }
+        }
+    }
     val prime: Array[Int] = Array(
         2,3,5,7,11,13,17,19,23,29,
     31,37,41,43,47,53,59,61,67,71,

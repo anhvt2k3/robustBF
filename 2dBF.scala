@@ -7,8 +7,8 @@ class Filter2D {
         x = p;
         y = q;
     }
-    def allocate() {
-        arr = Array.ofDim[Long](x, y);
+    def allocate {
+        this.arr = Array.ofDim[Long](x, y);
         for (i <- 0 until x; j <- 0 until y) {
             arr(i)(j) = 0
         }
@@ -41,12 +41,27 @@ class Filter2D {
     }
 }
 
-import scala.math
 
 class RoBF(n: Long, err: Float=0.001f) {
+    import scala.math
     import Prime.prime;
-    var memory: Long = -((n * math.log(err)) / math.pow(math.log(2), 2));
     var filter: Filter2D = new Filter2D;
-    val k: Long = memory / (2 * 64);
-    val f: Double = math.sqrt(k);
+    var size: Long = 0;
+    var memory: Long;
+
+    def this(n: Long, err: Float=0.001f) = {
+        println("\nInitializing 2DBF...\n")
+        this.memory = -((n * math.log(err)) / math.pow(math.log(2), 2));
+        
+        val a,b,c,d,f: Int;
+        val k: Long = this.memory / (2 * 64);
+        f = math.sqrt(k);
+        val i: Any = Prime.selectPrime(f);
+        a = Prime.prime(ì/2 + 3);
+        b = Prime.prime(ì/2 - 3);
+        this.filter.dim(a, b);
+        println("\n2DBF dimensions: " + a + " x " + b + "\n");
+        size += (a*b)*64;
+    }
+    
 }
