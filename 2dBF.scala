@@ -48,6 +48,15 @@ class RoBF(n: Long, err: Float=0.001f) {
     var filter: Filter2D = new Filter2D;
     var size: Long = 0;
     var memory: Long;
+    var seed1,seed2,seed3,seed4,seed5: Int;
+
+    def initSeed {
+        this.seed1=7689571;
+        this.seed2=15485863;
+        this.seed3=98899;
+        this.seed4=71287;
+        this.seed5=101653;
+    }
 
     def this(n: Long, err: Float=0.001f) = {
         println("\nInitializing 2DBF...\n")
@@ -64,4 +73,8 @@ class RoBF(n: Long, err: Float=0.001f) {
         size += (a*b)*64;
     }
     
+    def insert(buff: Char*, i: Int)
+    {
+        
+    }
 }
