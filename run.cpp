@@ -1,6 +1,5 @@
 #include "rBF.h"
 #include <time.h>
-#include <time.h>
 
 using namespace std;
 
@@ -14,6 +13,10 @@ int main()
 	unsigned long int count=0;
     double fp=0.0;
     
+	//////////////////////
+	// ! Insertion process
+	//////////////////////
+
     rBF rbf(n,0.001,0.0);
 	FILE *f=fopen("10M_r.txt","w");
 	clock_t start, end;
@@ -35,17 +38,18 @@ int main()
 	n=i;
 
 	///////////////////
-	// Lookup process
+	// ! Lookup process
 	///////////////////
 	printf("Lookup process of %lu\n",n);	
 	// fprintf(f,"Lookup process %lu\n",n);
 
 
 	///////////////////////
-	//Same set
+	// * Same set
 	///////////////////////
 	start=clock();
-	i=0;fp=0.0;
+	i=0;
+	fp=0.0;
 	for(i=0;i<n;i++)
 	{
 		sprintf(buff,"%lu",i);
@@ -73,10 +77,13 @@ int main()
 	
 	
 	///////////////////////
-	//Mixed set
+	// * Mixed set
 	///////////////////////
 	start=clock();
-	i=0;l=n/2;u=2*l+l;fp=0.0;
+	i=0;
+	l=n/2;
+	u=2*l+l;
+	fp=0.0;
 	for(i=l;i<u;i++)
 	{
 		sprintf(buff,"%lu",i);
@@ -103,7 +110,7 @@ int main()
 
 
 	///////////////////////
-	//Dijsoint set
+	// * Dijsoint set
 	///////////////////////
 	start=clock();
 	i=0;l=n+1;u=1000*n;fp=0.0;
@@ -132,7 +139,7 @@ int main()
 	rbf.resetStat();
 
 	///////////////////////
-	//Random set
+	// * Random set
 	///////////////////////
 	start=clock();
 	i=0;fp=0.0;
