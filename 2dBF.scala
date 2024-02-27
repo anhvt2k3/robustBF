@@ -44,6 +44,7 @@ class Filter2D {
 
 class RoBF(n: Long, err: Float=0.001f) {
     import scala.math
+    import Hash.murmur
     import Prime.prime;
     var filter: Filter2D = new Filter2D;
     var size: Long = 0;
@@ -73,8 +74,10 @@ class RoBF(n: Long, err: Float=0.001f) {
         size += (a*b)*64;
     }
     
-    def insert(buff: Char*, i: Int)
+    def insert(buff: String, i: Int)
     {
+        var h1,h2,h3: Long;
+        h1=
         
     }
 }
