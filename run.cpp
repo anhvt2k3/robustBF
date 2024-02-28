@@ -16,33 +16,37 @@ using namespace std;
 int main() 
 {
     char ch,buff[10240];
+#ifdef STRINGS
+	unsigned long int s_size = words_3.size();
+	unsigned long int q_size = words_4.size();
+	vector<string> q_mixed;
+	vector<string> q_random; 
+	unsigned long int n = s_size*1000;
+#else
     unsigned long int n = 10000000;
-
-	unsigned long int s_size = sizeof(words_3)/sizeof(words_3[0]);
-	unsigned long int q_size = sizeof(words_4)/sizeof(words_4[0]);
-
-
+#endif
 	unsigned long int l,u;
 	unsigned long int i,r;
 	unsigned long int TP,TN;
 	unsigned long int count=0;
     double fp=0.0;
+
+	printf("n=%lu\n",n);
     
 	//////////////////////
 	// ! Insertion process
 	//////////////////////
 
-    rBF rbf(n,0.001,0.0);
+    rBF rbf(n,0.01,0.0);
 	FILE *f=fopen("10M_r.txt","w");
 	clock_t start, end;
     start=clock();
-
 #ifdef STRINGS
-	for (i=0; i< q_size; i++)
+	for (i=0; i< s_size; i++)
 	{
-		rbf.insert(words_3[i]);
+		const char* key_= (words_3[i]).c_str();
+		rbf.insert(key_);
 	}
-
 #else
 	for(i=0;i<n;i++)
 	{
@@ -73,13 +77,14 @@ int main()
 	// * Same set : Q = S
 	///////////////////////
 	#ifdef SAME
-	start=clock();
 	i=0;
 	fp=0.0;
+	start=clock();
 #ifdef STRINGS
-	for (i=0; i< q_size; i++)
+	for (i=0; i< s_size; i++)
 	{
-		rbf.lookup(words_3[i]);
+		const char* key_= (words_3[i]).c_str();
+		rbf.lookup(key_);
 	}
 #else
 	for(i=0;i<n;i++)
@@ -110,21 +115,25 @@ int main()
 	
 	
 	///////////////////////
-	// * Mixed set : Q1 in S, Q2 not in S
+	// * Mixed set : Q1 in S, Q2 not in S; Q1 + Q2 = Q = 1.5 S
 	///////////////////////
 	#ifdef MIXED
-	start=clock();
+	l=n/2;
+	u=2*l+l; // u = 1.5*n
+	fp=0.0;
 	i=0;
 #ifdef STRINGS
-	q_mixed = 
-	for (i=0; i< q_size; i++)
+	// taking q_mixed from 0.5 S - 2.0 S
+	q_mixed = getSubvector(mergeVectors(words_3, words_4),
+							s_size/2, s_size*2-1);
+	start=clock();
+	for (i=0; i< 1.5*s_size; i++)
 	{
-		rbf.lookup(words_4[i]);
+		const char* key_= (q_mixed[i]).c_str();
+		rbf.lookup(key_);
 	}
 #else
-	l=n/2;
-	u=2*l+l;
-	fp=0.0;
+	start=clock();
 	for(i=l;i<u;i++)
 	{
 		sprintf(buff,"%lu",i);
@@ -153,17 +162,26 @@ int main()
 
 
 	///////////////////////
-	// * Disjoint set : Q not in S
+	// * Disjoint set : Q not in S, Q = S+1
 	///////////////////////
 	#ifdef DISJOINT
+	l=n+1;u=1000*n;fp=0.0;
+	i=0;
 	start=clock();
-	i=0;l=n+1;u=1000*n;fp=0.0;
+#ifdef STRINGS
+	for (i=0; i<= s_size; i++)
+	{
+		const char* key_= (words_4[i]).c_str();
+		rbf.lookup(key_);
+	}
+#else
 	for(i=1;i<=n;i++)
 	{
 		r=rand()%(u-l+1)+l;
 		sprintf(buff,"%lu",r);
 		rbf.lookup(buff);
 	}
+#endif
 	end=clock();
 	TN = rbf.getTN(); TP = rbf.getTP();
     //fp=(double)(found)/(double)n;
@@ -184,11 +202,22 @@ int main()
 	#endif
 
 	///////////////////////
-	// * Random set : random Q
+	// * Random set : random Q; Q = S+1
 	///////////////////////
 	#ifdef RANDOM
-	start=clock();
 	i=0;fp=0.0;
+#ifdef STRINGS
+	start=clock();
+	q_mixed = getSubvector( 
+					shuffleVector( mergeVectors(words_3, words_4)),
+					0, s_size);
+	for (i=0; i<= s_size; i++)
+	{
+		const char* key_= (q_mixed[i]).c_str();
+		rbf.lookup(key_);
+	}
+#else
+	start=clock();
 	for(i=1;i<=n;i++)
 	{
 		r=rand();
@@ -197,6 +226,7 @@ int main()
 		sprintf(buff,"%lu",r);
 		rbf.lookup(buff);
 	}
+#endif
 	end=clock();
 	TN = rbf.getTN(); TP = rbf.getTP();
     //fp=(double)(found-count)/(double)n;
