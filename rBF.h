@@ -31,7 +31,7 @@ protected:
         free(a); // Free memory for the array of pointers
         printf("\nMemory freed successfully...\n");
     }
-    void insert_keyBF(unsigned long int **b2, char *buff, int i)
+    void insert_keyBF(unsigned long int **b2, const char *buff, int i)
     {
         
         unsigned long int h1,h2,h3,h4,h5,h6,h7;
@@ -49,7 +49,7 @@ protected:
         //_set_(b2,h5);
         
     }
-    int lookup_keyBF(unsigned long int **b2, char *buff, int i)
+    int lookup_keyBF(unsigned long int **b2, const char *buff, int i)
     {
         unsigned long int h1,h2,h3,h4,h5,h6,h7;
 
@@ -174,13 +174,13 @@ protected:
         printf("\nAllocated and Initilized 2DBF Successfully...\n");
         return a;
     }
-    void insertSmartBF(char *key)
+    void insertSmartBF(const char *key)
     {
         int i;
         for(i=0;key[i]!='\0';i++);
         insert_keyBF(kBF,key,i);
     }
-    void lookupSmartBF(char *key)
+    void lookupSmartBF(const char *key)
     {
         int i;
         for(i=0;key[i]!='\0';i++);
@@ -211,7 +211,7 @@ public:
         kBF = allocate();
         resetStat();
     };
-    bool insert(char *key)
+    bool insert(const char *key)
     {
         try
         {
@@ -223,7 +223,7 @@ public:
             return false;
         }
     }
-    bool lookup(char *key)
+    bool lookup(const char *key)
     {
         try
         {
