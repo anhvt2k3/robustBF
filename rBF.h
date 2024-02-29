@@ -109,6 +109,7 @@ protected:
         f=sqrt(k);
         i=selectPrime(f);
         //int j=(i/1.5);
+        // printf("i=%d\n",i);
         a=prime[i/2+3];
         b=prime[i/2-3];
         //c=prime[i-3];
@@ -198,7 +199,7 @@ protected:
     {
         free_keyBF(kBF);
     }
-
+// ! public methods
 public:
     rBF(unsigned long int nn, double error=0.001, double false_positive=0.0)
     {

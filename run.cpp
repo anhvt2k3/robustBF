@@ -1,9 +1,9 @@
 #include "rBF.h"
-#include "string-test.h"
+#include "string-test.cpp"
 #include <time.h>
 
 // ? Test type toggle
-// #define STRINGS
+#define STRINGS
 
 // ? Test mode toggle
 #define SAME
@@ -15,8 +15,12 @@ using namespace std;
 
 int main() 
 {
+	printf("         Still alive here!     \n");
     char ch,buff[10240];
 #ifdef STRINGS
+	const vector<string> words_3 = activateKeysGetter();
+	const vector<string> words_4 = activateDisjointGetter();
+	
 	unsigned long int s_size = words_3.size();
 	unsigned long int q_size = words_4.size();
 	vector<string> q_mixed;
@@ -76,7 +80,7 @@ int main()
 
 
 	///////////////////////
-	// * Same set : Q = S
+	// ! Same set : Q = S
 	///////////////////////
 	#ifdef SAME
 	i=0;
@@ -117,7 +121,7 @@ int main()
 	
 	
 	///////////////////////
-	// * Mixed set : Q1 in S, Q2 not in S; Q1 + Q2 = Q = 1.5 S
+	// ! Mixed set : Q1 in S, Q2 not in S; Q1 + Q2 = Q = 1.5 S
 	///////////////////////
 	#ifdef MIXED
 	l=n/2;
@@ -162,18 +166,18 @@ int main()
 	rbf.resetStat();
 	#endif
 
-
 	///////////////////////
-	// * Disjoint set : Q not in S, Q = S+1
+	// ! Disjoint set : Q not in S, Q = S+1
 	///////////////////////
 	#ifdef DISJOINT
 	l=n+1;u=1000*n;fp=0.0;
 	i=0;
 	start=clock();
 #ifdef STRINGS
-	for (i=0; i<= s_size; i++)
+	for (i=0; i<< s_size; i++)
 	{
 		const char* key_= (words_4[i]).c_str();
+		// printf("\n%s\n",key_);
 		rbf.lookup(key_);
 	}
 #else
@@ -204,7 +208,7 @@ int main()
 	#endif
 
 	///////////////////////
-	// * Random set : random Q; Q = S+1
+	// ! Random set : random Q; Q = S+1
 	///////////////////////
 	#ifdef RANDOM
 	i=0;fp=0.0;
