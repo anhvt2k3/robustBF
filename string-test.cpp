@@ -2,23 +2,12 @@
 
 using namespace std;
 
-string KEYFILE = "keys.txt";
-string DISJOINTFILE = "disjoint.txt";
-
-vector<string> activateKeysGetter() {
-    return readCombinationsFromFile(KEYFILE);
+void activateKeysGenerator() {
+    activateGenerator(lst_x, KEYFILE, MAXLENGTH);
 }
 
-vector<string> activateDisjointGetter() {
-    return readCombinationsFromFile(DISJOINTFILE);
-}
-
-vector<string> activateKeysGenerator() {
-    activateGenerator(lst_x, KEYFILE, 7);
-}
-
-vector<string> activateDisjointGenerator() {
-    activateGenerator(lst_z, DISJOINTFILE, 7);
+void activateDisjointGenerator() {
+    activateGenerator(lst_z, DISJOINTFILE, MAXLENGTH);
 }
 
 int main()

@@ -1,5 +1,5 @@
 #include "rBF.h"
-#include "string-test.cpp"
+#include "string-test.h"
 #include <time.h>
 
 // ? Test type toggle
@@ -27,7 +27,7 @@ int main()
 	vector<string> q_random; 
 	// unsigned long int n = s_size;
 	// BF wont be created for n = 135 | 1350
-	unsigned long int n = s_size*100;
+	unsigned long int n = s_size;
 #else
     unsigned long int n = 10000000;
 #endif
