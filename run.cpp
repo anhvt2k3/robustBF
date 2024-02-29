@@ -3,7 +3,7 @@
 #include <time.h>
 
 // ? Test type toggle
-#define STRINGS
+// #define STRINGS
 
 // ? Test mode toggle
 #define SAME
@@ -21,7 +21,9 @@ int main()
 	unsigned long int q_size = words_4.size();
 	vector<string> q_mixed;
 	vector<string> q_random; 
-	unsigned long int n = s_size*1000;
+	// unsigned long int n = s_size;
+	// BF wont be created for n = 135 | 1350
+	unsigned long int n = s_size*100;
 #else
     unsigned long int n = 10000000;
 #endif
