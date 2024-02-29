@@ -105,9 +105,9 @@ int main()
 	//fp=(double)(TP+TN+CTN)/(double)(TP+TN+CTN+FN+FP);
 	diff=(double)(end-start)/CLOCKS_PER_SEC;
 	
-	printf("\nSame set\nAccuracy positive:%lf, False positive %lf\n",(1.0-fp)*100,(fp));
+	printf("\nSame set\nAccuracy positive:%lf, False positive rate: %lf\n",(1.0-fp)*100,(fp));
 	printf("Elapsed Time of lookup:%f\n", (double)(end-start)/CLOCKS_PER_SEC);
-	// fprintf(f,"\nSame set\nAccuracy positive:%lf, False positive %lf\n",(1.0-fp)*100,(fp));
+	// fprintf(f,"\nSame set\nAccuracy positive:%lf, False positive rate: %lf\n",(1.0-fp)*100,(fp));
 	// fprintf(f,"Millions insertion:%lf\n",(double)n/diff);
 	// fprintf(f,"Elapsed Time of lookup:%f\n", (double)(end-start)/CLOCKS_PER_SEC);
 
@@ -151,10 +151,10 @@ int main()
     //fp=(double)(found-l)/(double)n;
 	fp=(double)(TP-l)/(double)(n);
 	diff=(double)(end-start)/CLOCKS_PER_SEC;
-	printf("\nMixed set\nAccuracy positive:%lf, False positive %lf\n",(1.0-fp)*100.0,fp);
+	printf("\nMixed set\nAccuracy positive:%lf, False positive rate: %lf\n",(1.0-fp)*100.0,fp);
 	//printf("Found: %lu\tupper:%lu\tlower:%lu\n",found,u,l);
 	printf("Elapsed Time of lookup:%f\n", (double)(end-start)/CLOCKS_PER_SEC);
-	// fprintf(f,"\nMixed set\nAccuracy positive:%lf, False positive %lf\n",(1.0-fp)*100.0,fp);
+	// fprintf(f,"\nMixed set\nAccuracy positive:%lf, False positive rate: %lf\n",(1.0-fp)*100.0,fp);
 	// fprintf(f,"Millions insertion:%lf\n",(double)n/diff);
     // fprintf(f,"Elapsed Time of lookup:%f\n", (double)(end-start)/CLOCKS_PER_SEC);
 
@@ -174,7 +174,7 @@ int main()
 	i=0;
 	start=clock();
 #ifdef STRINGS
-	for (i=0; i<< s_size; i++)
+	for (i=0; i< s_size; i++)
 	{
 		const char* key_= (words_4[i]).c_str();
 		// printf("\n%s\n",key_);
@@ -193,9 +193,9 @@ int main()
     //fp=(double)(found)/(double)n;
 	fp=(double)(TP)/(double)(n);
 	diff=(double)(end-start)/CLOCKS_PER_SEC;
-	printf("\nDisjoint set\nAccuracy positive:%lf, False positive %lf\n",(1.0-fp)*100.0,fp);
+	printf("\nDisjoint set\nAccuracy positive:%lf, False positive rate: %lf\n",(1.0-fp)*100.0,fp);
 	printf("Elapsed Time of lookup:%f\n", (double)(end-start)/CLOCKS_PER_SEC);
-	// fprintf(f,"\nDisjoint set\nAccuracy positive:%lf, False positive %lf\n",(1.0-fp)*100.0,fp);
+	// fprintf(f,"\nDisjoint set\nAccuracy positive:%lf, False positive rate: %lf\n",(1.0-fp)*100.0,fp);
 	// fprintf(f,"Millions insertion:%lf\n",(double)n/diff);
 	// fprintf(f,"Elapsed Time of lookup:%f\n", (double)(end-start)/CLOCKS_PER_SEC);
 	
@@ -220,6 +220,7 @@ int main()
 	for (i=0; i<= s_size; i++)
 	{
 		const char* key_= (q_mixed[i]).c_str();
+		count = count + (int)isKeyChecker(key_);
 		rbf.lookup(key_);
 	}
 #else
@@ -229,6 +230,7 @@ int main()
 		r=rand();
 		if(r<=n)
 			count++;
+		// count = number of keys appears
 		sprintf(buff,"%lu",r);
 		rbf.lookup(buff);
 	}
@@ -239,10 +241,10 @@ int main()
 	fp=(double)(TP-count)/(double)(n);
 	diff=(double)(end-start)/CLOCKS_PER_SEC;
 	
-	printf("\nRandom set\nAccuracy positive:%lf, False positive %lf\n",(1.0-fp)*100.0,fp);
+	printf("\nRandom set\nAccuracy positive:%lf, False positive rate: %lf\n",(1.0-fp)*100.0,fp);
 	printf("Count:%lu\n",count);
 	printf("Elapsed Time of lookup:%f\n",(double)(end-start)/CLOCKS_PER_SEC);
-	// fprintf(f,"\nRandom set\nAccuracy positive:%lf, False positive %lf\n",(1.0-fp)*100.0,fp);
+	// fprintf(f,"\nRandom set\nAccuracy positive:%lf, False positive rate: %lf\n",(1.0-fp)*100.0,fp);
 	// fprintf(f,"Millions insertion:%lf\n",(double)n/diff);
 	// fprintf(f,"Elapsed Time of lookup:%f\n",(double)(end-start)/CLOCKS_PER_SEC);
 

@@ -37,6 +37,10 @@ std::vector<std::string> activateDisjointGetter() {
     return readCombinationsFromFile(DISJOINTFILE);
 }
 
+bool isKeyChecker(const std::string& word) {
+    return std::find(lst_x.begin(), lst_x.end(), word[0]) != lst_x.end();
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////// GENERATOR FUNCTIONS /////////////////////////////
