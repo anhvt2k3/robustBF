@@ -124,13 +124,12 @@ int main()
 	// ! Mixed set : Q1 in S, Q2 not in S; Q1 + Q2 = Q = 1.5 S
 	///////////////////////
 	#ifdef MIXED
-	l=n/2;
-	u=2*l+l; // u = 1.5*n
 	fp=0.0;
 	i=0;
 #ifdef STRINGS
 	// taking q_mixed from 0.5 S - 2.0 S
-	q_mixed = getSubvector(mergeVectors(words_3, words_4),
+	l=s_size;
+	q_mixed = getSubvector(mergeVectors(words_4, words_3),
 							s_size/2, s_size*2-1);
 	start=clock();
 	for (i=0; i< 1.5*s_size; i++)
@@ -139,6 +138,8 @@ int main()
 		rbf.lookup(key_);
 	}
 #else
+	l=n/2;
+	u=2*l+l; // u = 1.5*n
 	start=clock();
 	for(i=l;i<u;i++)
 	{
@@ -170,7 +171,7 @@ int main()
 	// ! Disjoint set : Q not in S, Q = S+1
 	///////////////////////
 	#ifdef DISJOINT
-	l=n+1;u=1000*n;fp=0.0;
+	fp=0.0;
 	i=0;
 	start=clock();
 #ifdef STRINGS
@@ -181,6 +182,7 @@ int main()
 		rbf.lookup(key_);
 	}
 #else
+	l=n+1;u=1000*n;
 	for(i=1;i<=n;i++)
 	{
 		r=rand()%(u-l+1)+l;
