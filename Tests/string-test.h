@@ -7,9 +7,9 @@
 #include <fstream>
 #include <iterator>
 
-string KEYFILE = "keys.txt";
-string DISJOINTFILE = "disjoint.txt";
-int MAXLENGTH = 9;
+std::string KEYFILE = "keys.txt";
+std::string DISJOINTFILE = "disjoint.txt";
+const int MAXLENGTH = 9;
 
 // const char words_1[][100] = {"Apple","Banana","Chair","Dog","Elephant","Forest","Guitar","Hammer","Ice Cream","Jellyfish","Kite","Lighthouse","Mountain","Notebook","Orange","Penguin","Quilt","Rainbow","Sunflower","Train","Umbrella","Volcano","Watermelon","Xylophone","Yo-yo","Zebra","Astronaut","Backpack","Cloud","Dolphin","Easel","Firefly","Giraffe","Hiking","Igloo","Jigsaw","Koala","Lemonade","Moonlight","Narwhal","Ostrich","Parrot","Quasar","Rollercoaster","Seahorse","Telescope","Unicorn","Volleyball","Whistle","X-ray","Yacht","Zipline","Arcade","Bubblegum","Carousel","Daffodil","Echo","Ferris Wheel","Galaxy","Honeycomb","Iceberg","Jamboree","Kaleidoscope","Lagoon","Maze","Nebula","Otter","Pajamas","Quilt","Rocket","Seashell","Tangerine","Underground","Victory","Whisk","Xerox","Yardstick","Zenith","Atlas","Bliss","Cascade","Dazzle","Eclipse","Fandango","Glitter","Harmony","Illusion","Jamboree","Krypton","Lullaby","Memento","Nimbus","Opulent","Pristine","Quicksilver","Radiant","Serendipity","Tranquil","Utopia","Wondrous"};
 // const char words_2[][100] = {"Aeroplane","Balloon","Cactus","Dolphin","Espresso","Feather","Gondola","Hula Hoop","Iguana","Jazz","Kaleidoscope","Lighthouse","Meteor","Nutmeg","Oregano","Puddle","Quasar","Rendezvous","Snorkel","Trampoline","Underwater","Velvet","Waffle","Xylograph","Yeti","Zenith","Albatross","Bonsai","Crumpet","Drizzle","Eucalyptus","Flamenco","Guacamole","Hologram","Indigo","Jigsaw","Kiwi","Lagoon","Mango","Nimbus","Octopus","Pajamas","Quokka","Radiance","Saffron","Tofu","Utopia","Vortex","Whimsy","Xenon","Yodel","Zephyr","Anemone","Bumblebee","Chai","Dappled","Ephemeral","Fandango","Gazebo","Harmony","Ineffable","Jamboree","Kite","Luminous","Melange","Nectar","Odyssey","Prismatic","Quandary","Ripple","Spectrum","Tranquil","Ultraviolet","Verve","Whirlpool","Xanadu","Yonder","Zephyr","Amethyst","Blissful","Cascade","Dazzle","Effervescent","Fractal","Gossamer","Hallowed","Incandescent","Jovial","Kismet","Lullaby","Mirage","Nebula","Opulent","Panorama","Quicksilver","Resplendent","Serendipity","Tantalizing","Unison","Wondrouse"};

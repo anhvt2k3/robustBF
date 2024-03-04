@@ -42,7 +42,7 @@ int main()
 	//////////////////////
 	// ! Insertion process
 	//////////////////////
-
+	
     rBF rbf(n,0.01,0.0);
 	FILE *f=fopen("10M_r.txt","w");
 	clock_t start, end;
