@@ -68,7 +68,6 @@ cout<<"\n     Still alive here!       \n";
 	//////////////////////
 	// ! Insertion process
 	//////////////////////
-	FILE *f=fopen("10M_r.txt","w");
 	clock_t start, end;
   
   start=clock();
@@ -308,6 +307,5 @@ cout<<"\n     Still alive here!       \n";
 	// fprintf(f,"TP: %lu\tTN:  %lu\n",TP,TN);
 	
 	#endif
-  fclose(f);
   return 0;
 }
