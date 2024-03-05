@@ -32,8 +32,8 @@ int main(int argc, char **argv) {
 
 char ch,buff[10240];
 #ifdef STRINGS
-	const vector<string> words_3 = activateKeysGetter();
-	const vector<string> words_4 = activateDisjointGetter();
+	vector<string> words_3 = activateKeysGetter();
+	vector<string> words_4 = activateDisjointGetter();
 	
 	unsigned long int s_size = words_3.size();
 	unsigned long int q_size = words_4.size();
@@ -48,7 +48,9 @@ char ch,buff[10240];
   // PackedTable, accepting keys of size_t type and making 13 bits
   // for each key:
   //   CuckooFilter<size_t, 13, cuckoofilter::PackedTable> filter(total_items);
-  CuckooFilter<string, 12> filter(s_size);
+cout<<"\n     Still alive here!       \n";
+//   CuckooFilter<string, 8, cuckoofilter::SingleTable,cuckoofilter::HashUtil> filter(s_size);
+  CuckooFilter<char*, 8> filter(s_size);
   // : For the size of each char = 8 bits
   // CuckooFilter<string, (size_t)(MAXLENGTH*8)> filter(s_size);
   
@@ -74,7 +76,7 @@ char ch,buff[10240];
 #ifdef STRINGS
   size_t num_inserted = 0;
   for (size_t i = 0; i < s_size; i++, num_inserted++) {
-		const char* key_= (words_3[i]).c_str();
+		char* key_= (words_3[i]).data();
     if (filter.Add(key_) != cuckoofilter::Ok) {
       cout << "Error when inserting item " << i << endl;
       break;
@@ -92,7 +94,7 @@ char ch,buff[10240];
   // Check if previously inserted items are in the filter, expected
   // true for all items
   for (size_t i = 0; i < num_inserted; i++) {
-    assert(filter.Contain(words_3[i]) == cuckoofilter::Ok);
+    assert(filter.Contain(words_3[i].data()) == cuckoofilter::Ok);
   }
 
 	double diff=(double)(end-start)/CLOCKS_PER_SEC;
@@ -123,7 +125,7 @@ char ch,buff[10240];
 #ifdef STRINGS
 	for (i=0; i< s_size; i++)
 	{
-		const char* key_= (words_3[i]).c_str();
+		char* key_= (words_3[i]).data();
     if (filter.Contain(key_) == cuckoofilter::Ok) {
       TP++;
     }
@@ -173,7 +175,7 @@ char ch,buff[10240];
 	start=clock();
 	for (i=0; i< 1.5*s_size; i++)
 	{
-		const char* key_= (q_mixed[i]).c_str();
+		char* key_= (q_mixed[i]).data();
     if (filter.Contain(key_) == cuckoofilter::Ok) {
       TP++;
     }
@@ -219,7 +221,7 @@ char ch,buff[10240];
 #ifdef STRINGS
 	for (i=0; i< s_size; i++)
 	{
-		const char* key_= (words_4[i]).c_str();
+		char* key_= (words_4[i]).data();
 		// printf("\n%s\n",key_);
     if (filter.Contain(key_) == cuckoofilter::Ok) {
       TP++;
@@ -266,7 +268,7 @@ char ch,buff[10240];
 					0, s_size);
 	for (i=0; i<= s_size; i++)
 	{
-		const char* key_= (q_mixed[i]).c_str();
+		char* key_= (q_mixed[i]).data();
 		count = count + (int)isKeyChecker(key_);
 		
     if (filter.Contain(key_) == cuckoofilter::Ok) {
