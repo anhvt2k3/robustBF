@@ -104,7 +104,7 @@ cout<<"\n     Still alive here!       \n";
 	// fprintf(f,"Elapsed Time of insertion:%f\n\n", (double)(end-start)/CLOCKS_PER_SEC);
 	
 	// why is this needed?
-	n=i;
+	n=num_inserted;
 
 	///////////////////
 	// ! Lookup process
