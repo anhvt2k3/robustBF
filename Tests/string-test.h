@@ -7,8 +7,8 @@
 #include <fstream>
 #include <iterator>
 
-std::string KEYFILE = "keys.txt";
-std::string DISJOINTFILE = "disjoint.txt";
+std::string KEYFILE = "Tests/keys.txt";
+std::string DISJOINTFILE = "Tests/disjoint.txt";
 const int MAXLENGTH = 9;
 
 // const char words_1[][100] = {"Apple","Banana","Chair","Dog","Elephant","Forest","Guitar","Hammer","Ice Cream","Jellyfish","Kite","Lighthouse","Mountain","Notebook","Orange","Penguin","Quilt","Rainbow","Sunflower","Train","Umbrella","Volcano","Watermelon","Xylophone","Yo-yo","Zebra","Astronaut","Backpack","Cloud","Dolphin","Easel","Firefly","Giraffe","Hiking","Igloo","Jigsaw","Koala","Lemonade","Moonlight","Narwhal","Ostrich","Parrot","Quasar","Rollercoaster","Seahorse","Telescope","Unicorn","Volleyball","Whistle","X-ray","Yacht","Zipline","Arcade","Bubblegum","Carousel","Daffodil","Echo","Ferris Wheel","Galaxy","Honeycomb","Iceberg","Jamboree","Kaleidoscope","Lagoon","Maze","Nebula","Otter","Pajamas","Quilt","Rocket","Seashell","Tangerine","Underground","Victory","Whisk","Xerox","Yardstick","Zenith","Atlas","Bliss","Cascade","Dazzle","Eclipse","Fandango","Glitter","Harmony","Illusion","Jamboree","Krypton","Lullaby","Memento","Nimbus","Opulent","Pristine","Quicksilver","Radiant","Serendipity","Tranquil","Utopia","Wondrous"};
